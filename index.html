@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>CSS Variables | JS30</title>
+    <style>
+        :root{
+            --base: #66fcf1;
+            --spacing: 10px;
+            --blur: 10px;
+            --border-radius: 10px;
+        }
+        body{
+            text-align: center;
+            background: #123;
+            color: #fff;
+            font-family: 'helvetica neue', sans-serif;
+            font-size: 30px;
+            font-weight: 100;
+
+        }
+        
+        img{
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+            border-radius: var(--border-radius);
+        }
+        span{
+            color: var(--base);
+            font-weight: 900;
+            font-family: serif;
+        }
+        .controls{
+            margin-bottom: 50px;
+        }
+        input{
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+        <h1>Update <span>CSS</span> Variables with <span>JS</span></h1>
+
+        <div class="controls">
+            <label for="spacing">Spacing:</label>
+            <!-- dataset - object that contains all of the data attribute set on HTML elements -->
+            <input type="range" name="spacing" id="spacing" min="10" max="100" value="10" data-sizing="px">
+
+            <label for="blur">Blur:</label>
+            <input type="range" name="blur" id="blur" min="0" max="25" value="10" data-sizing="px">
+
+            <label for="border-radius">Border-radius:</label>
+            <input type="range" name="border-radius" id="border-radius" min="0" max="350" value="10" data-sizing="px">
+            
+
+            <label for="base">Base Color:</label>
+            <input type="color" name="base" id="base" value="#66fcf1">
+        </div>
+            
+        <img src="image/Beautiful-Stars.jpeg" alt="Man with torch">
+
+    
+    
+    <script>
+        const controls = document.querySelectorAll('.controls input');
+
+        function changeValues() {
+        const suffix = this.dataset.sizing || '';
+        document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+        }
+
+        // for each input in controls...
+        controls.forEach(input => input.addEventListener('change', changeValues));
+        controls.forEach(input => input.addEventListener('mousemove', changeValues));
+    </script>
+</body>
+</html>
